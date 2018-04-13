@@ -1,29 +1,27 @@
 #pragma once
-#include <assert.h>
-#include "ReflectablePropertyBase.h"
+#include <string>
+#include <typeinfo>
 
-template<class T>
-class ReflectableProperty : public ReflectablePropertyBase
+class Reflectable;
+
+class ReflectableProperty
 {
 public:
-   ReflectableProperty( T& prop, Reflectable& owner, std::string name ) : ReflectablePropertyBase( owner, std::move( name ) )
+   ReflectableProperty( Reflectable& owner, std::string name );
+
+   template<class T>
+   T GetValue()
    {
-      m_Property = &prop;
+      return *(static_cast<T*>(GetValuePtr( typeid(T) )));
+   }
+
+   template<class T>
+   void SetValue( const T& value )
+   {
+      SetValue( static_cast<const void*>(&value), typeid(T) );
    }
 
 protected:
-   void* GetValuePtr( const std::type_info& inputType ) override
-   {
-      assert( inputType.hash_code() == typeid(T).hash_code() );
-      return static_cast<void*>(m_Property);
-   }
-
-   void SetValue( void* value, const std::type_info& inputType ) override
-   {
-      assert( inputType.hash_code() == typeid(T).hash_code() );
-      *m_Property = *(static_cast<T*>(value));
-   }
-
-private:
-   T* m_Property;
+   virtual void* GetValuePtr( const std::type_info& inputType ) = 0;
+   virtual void SetValue( const void* value , const std::type_info& inputType ) = 0;
 };

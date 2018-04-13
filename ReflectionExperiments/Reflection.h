@@ -1,12 +1,20 @@
 #pragma once
 #include <string>
 
-class ReflectablePropertyBase;
+class Reflectable;
 
 class Reflection
 {
 public:
-   static ReflectablePropertyBase* GetProperty( const std::string& name, Reflectable& owner );
-   static auto PropertiesBegin( const std::string& name, Reflectable& owner );
-   static auto PropertiesEnd( const std::string& name, Reflectable& owner );
+   static ReflectableProperty* GetProperty( const std::string& name, Reflectable& owner );
+
+   static auto PropertiesBegin( Reflectable& owner );
+   static auto PropertiesEnd( Reflectable& owner );
+
+   template<class T>
+   static void GetPropertyNames( std::vector<std::string>& names )
+   {
+      T propOwner;
+      propOwner.GetPropertyNames( names );
+   }
 };

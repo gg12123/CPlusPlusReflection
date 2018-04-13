@@ -1,5 +1,5 @@
 #pragma once
 
-#define DECLARE_REFLECTABLE( type, name )\
+#define DECLARE_REFLECTABLE_PROP( type, name )\
    type name;\
-   ReflectableProperty<type> ref##name = ReflectableProperty<type>( name , *this , #name )
+   DerivedReflectableProperty<type> ___##name = DerivedReflectableProperty<type>( name , *this , #name )

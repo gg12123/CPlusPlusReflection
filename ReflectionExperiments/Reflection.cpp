@@ -1,17 +1,17 @@
 #include "stdafx.h"
 #include "Reflectable.h"
 
-ReflectablePropertyBase* Reflection::GetProperty( const std::string& name, Reflectable& owner )
+ReflectableProperty* Reflection::GetProperty( const std::string& name, Reflectable& owner )
 {
    return owner.GetProperty( name );
 }
 
-auto Reflection::PropertiesBegin( const std::string& name, Reflectable& owner )
+auto Reflection::PropertiesBegin( Reflectable& owner )
 {
    return owner.PropertiesBegin();
 }
 
-auto Reflection::PropertiesEnd( const std::string& name, Reflectable& owner )
+auto Reflection::PropertiesEnd( Reflectable& owner )
 {
    return owner.PropertiesEnd();
 }

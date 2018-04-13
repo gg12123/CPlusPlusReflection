@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Reflectable.h"
 
-void Reflectable::Register( ReflectablePropertyBase& prop, std::string name )
+void Reflectable::Register( ReflectableProperty& prop, std::string name )
 {
    m_Properties[ std::move( name ) ] = &prop;
 }
 
-ReflectablePropertyBase* Reflectable::GetProperty( const std::string& name )
+ReflectableProperty* Reflectable::GetProperty( const std::string& name )
 {
-   ReflectablePropertyBase* prop = nullptr;
+   ReflectableProperty* prop = nullptr;
    auto it = m_Properties.find( name );
 
    if (it != m_Properties.end())
@@ -17,4 +17,12 @@ ReflectablePropertyBase* Reflectable::GetProperty( const std::string& name )
    }
 
    return prop;
+}
+
+void Reflectable::GetPropertyNames( std::vector<std::string>& names )
+{
+   for (auto it = m_Properties.begin(); it != m_Properties.end(); it++)
+   {
+      names.push_back( it->first );
+   }
 }

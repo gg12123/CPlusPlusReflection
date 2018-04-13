@@ -27,16 +27,19 @@
     <ClInclude Include="Reflectable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ReflectablePropertyBase.h">
+    <ClInclude Include="ReflectionMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reflection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DerivedReflectableProperty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ReflectableProperty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ReflectionMacros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Reflection.h">
+    <ClInclude Include="DerivedReflectableMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,13 +50,13 @@
     <ClCompile Include="ReflectionExperiments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReflectablePropertyBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Reflectable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Reflection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReflectableProperty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

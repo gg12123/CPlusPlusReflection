@@ -1,21 +1,23 @@
 #pragma once
 #include <unordered_map>
-#include "ReflectableProperty.h"
+#include "DerivedReflectableProperty.h"
 #include "ReflectionMacros.h"
 #include "Reflection.h"
 
 class Reflectable
 {
-   friend ReflectablePropertyBase;
+   friend ReflectableProperty;
    friend Reflection;
 
 private:
-   void Register( ReflectablePropertyBase& prop, std::string name );
+   void Register( ReflectableProperty& prop, std::string name );
 
-   ReflectablePropertyBase* GetProperty( const std::string& name );
+   ReflectableProperty* GetProperty( const std::string& name );
+
+   void GetPropertyNames( std::vector<std::string>& names );
 
    auto PropertiesBegin() { return m_Properties.begin(); }
    auto PropertiesEnd() { return m_Properties.end(); }
 
-   std::unordered_map<std::string, ReflectablePropertyBase*> m_Properties;
+   std::unordered_map<std::string, ReflectableProperty*> m_Properties;
 };

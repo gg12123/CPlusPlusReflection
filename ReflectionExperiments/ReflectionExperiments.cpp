@@ -2,8 +2,9 @@
 //
 
 #include "stdafx.h"
+
 #include "Reflectable.h"
-#include "Reflection.h"
+#include "DerivedReflectableMethod.h"
 #include <iostream>
 
 class TestReflectable : public Reflectable
@@ -14,26 +15,31 @@ public:
       m_X = 99.0;
    }
 
+   int TestFunc( double x ) { return 0; }
+
    double GetX() { return m_X; }
 
-   DECLARE_REFLECTABLE( double, m_X );
+   void VoidMethod() {}
+
+   DECLARE_REFLECTABLE_PROP( double, m_X );
+   DECLARE_REFLECTABLE_PROP( double, m_abc );
+   DECLARE_REFLECTABLE_PROP( double, m_Num );
+
+   DerivedReflectableMethod<TestReflectable, int, double> method =
+      DerivedReflectableMethod<TestReflectable, int, double>( &TestReflectable::TestFunc, *this, "method" );
+
+   DerivedReflectableMethod<TestReflectable, double> method2 =
+      DerivedReflectableMethod<TestReflectable, double>( &TestReflectable::GetX, *this, "method2" );
+
+   DerivedReflectableMethod<TestReflectable, void> method3 =
+      DerivedReflectableMethod<TestReflectable, void>( &TestReflectable::VoidMethod, *this, "method2" );
 };
 
 
 int main()
 {
-   TestReflectable tr;
-
-   ReflectablePropertyBase* prop = Reflection::GetProperty( "m_X", tr );
-
-   std::cout << prop->GetValue<double>() << std::endl;
-
-   prop->SetValue<double>( 1.0 );
-
-   std::cout << tr.GetX();
-
-   int x;
-   std::cin >> x;
+   std::vector<std::string> names;
+   Reflection::GetPropertyNames<TestReflectable>( names );
 
    return 0;
 }
