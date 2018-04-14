@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Reflectable.h"
 
-void Reflectable::Register( ReflectableProperty& prop, std::string name )
+void Reflectable::Register( ReflectableProperty& prop, const char* name )
 {
-   m_Properties[ std::move( name ) ] = &prop;
+   m_Properties[ name ] = &prop;
 }
 
 ReflectableProperty* Reflectable::GetProperty( const std::string& name )

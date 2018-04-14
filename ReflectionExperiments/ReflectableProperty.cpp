@@ -2,7 +2,7 @@
 #include "Reflectable.h"
 #include "ReflectableProperty.h"
 
-ReflectableProperty::ReflectableProperty( Reflectable& owner, std::string name )
+ReflectableProperty::ReflectableProperty( Reflectable& owner, const char* name )
 {
-   owner.Register( *this, std::move( name ) );
+   owner.Register( *this, name );
 }

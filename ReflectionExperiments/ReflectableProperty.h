@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include <typeinfo>
 
 class Reflectable;
@@ -7,7 +6,7 @@ class Reflectable;
 class ReflectableProperty
 {
 public:
-   ReflectableProperty( Reflectable& owner, std::string name );
+   ReflectableProperty( Reflectable& owner, const char* name );
 
    template<class T>
    T GetValue()
@@ -16,12 +15,12 @@ public:
    }
 
    template<class T>
-   void SetValue( const T& value )
+   void SetValue( T value )
    {
-      SetValue( static_cast<const void*>(&value), typeid(T) );
+      SetValue( static_cast<void*>(&value), typeid(T) );
    }
 
 protected:
    virtual void* GetValuePtr( const std::type_info& inputType ) = 0;
-   virtual void SetValue( const void* value , const std::type_info& inputType ) = 0;
+   virtual void SetValue( void* value , const std::type_info& inputType ) = 0;
 };

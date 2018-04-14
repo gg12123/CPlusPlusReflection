@@ -10,7 +10,7 @@ class Reflectable
    friend Reflection;
 
 private:
-   void Register( ReflectableProperty& prop, std::string name );
+   void Register( ReflectableProperty& prop, const char* name );
 
    ReflectableProperty* GetProperty( const std::string& name );
 

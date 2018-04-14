@@ -6,7 +6,7 @@ template<class ownerT, class rtnT, class... paramsTs>
 class DerivedReflectableMethod
 {
 public:
-   DerivedReflectableMethod( std::function<rtnT( ownerT&, paramsTs... )> method, ownerT& owner, std::string name )
+   DerivedReflectableMethod( std::function<rtnT( ownerT&, paramsTs... )>&& method, ownerT& owner, const char* name )
    {
       m_Method = std::move( method );
       m_Owner = &owner;

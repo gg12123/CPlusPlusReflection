@@ -1,8 +1,3 @@
-﻿  stdafx.cpp
-  ReflectionExperiments.cpp
-  Reflection.cpp
-  ReflectableProperty.cpp
-  Reflectable.cpp
-  Generating Code...
+﻿  ReflectionExperiments.cpp
   ReflectionExperiments.vcxproj -> C:\Users\gg_11\Documents\Visual Studio 2015\Projects\CPlusPlusReflection\Debug\ReflectionExperiments.exe
   ReflectionExperiments.vcxproj -> C:\Users\gg_11\Documents\Visual Studio 2015\Projects\CPlusPlusReflection\Debug\ReflectionExperiments.pdb (Full PDB)

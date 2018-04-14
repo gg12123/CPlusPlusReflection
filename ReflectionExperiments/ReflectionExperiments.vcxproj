@@ -148,6 +148,7 @@
     <ClInclude Include="DerivedReflectableMethod.h" />
     <ClInclude Include="Reflectable.h" />
     <ClInclude Include="DerivedReflectableProperty.h" />
+    <ClInclude Include="ReflectableMethod.h" />
     <ClInclude Include="ReflectableProperty.h" />
     <ClInclude Include="Reflection.h" />
     <ClInclude Include="ReflectionMacros.h" />

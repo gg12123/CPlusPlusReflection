@@ -41,6 +41,11 @@ int main()
    std::vector<std::string> names;
    Reflection::GetPropertyNames<TestReflectable>( names );
 
+   TestReflectable tr;
+   auto* prop = Reflection::GetProperty( names[ 0 ], tr );
+
+   prop->SetValue<double>( 1.0 );
+
    return 0;
 }
 
