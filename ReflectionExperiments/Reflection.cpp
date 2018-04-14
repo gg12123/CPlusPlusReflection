@@ -6,6 +6,11 @@ ReflectableProperty* Reflection::GetProperty( const std::string& name, Reflectab
    return owner.GetProperty( name );
 }
 
+ReflectableMethod* Reflection::GetMethod( const std::string& name, Reflectable& owner )
+{
+   return owner.GetMethod( name );
+}
+
 auto Reflection::PropertiesBegin( Reflectable& owner )
 {
    return owner.PropertiesBegin();

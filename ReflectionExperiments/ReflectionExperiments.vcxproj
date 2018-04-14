@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Reflectable.cpp" />
+    <ClCompile Include="ReflectableMethod.cpp" />
     <ClCompile Include="ReflectableProperty.cpp" />
     <ClCompile Include="Reflection.cpp" />
     <ClCompile Include="ReflectionExperiments.cpp" />

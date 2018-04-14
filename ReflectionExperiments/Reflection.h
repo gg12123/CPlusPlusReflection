@@ -7,6 +7,7 @@ class Reflection
 {
 public:
    static ReflectableProperty* GetProperty( const std::string& name, Reflectable& owner );
+   static ReflectableMethod* GetMethod( const std::string& name, Reflectable& owner );
 
    static auto PropertiesBegin( Reflectable& owner );
    static auto PropertiesEnd( Reflectable& owner );

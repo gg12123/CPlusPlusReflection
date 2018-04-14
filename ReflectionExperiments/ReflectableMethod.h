@@ -13,15 +13,15 @@ public:
    template<class T>
    T GetMethod()
    {
-      return *(static_cast<T*>(GetValuePtr( typeid(T) )));
+      return *(static_cast<T*>(GetMethodPtr( typeid(T) )));
    }
 
    template<class ownerT, class rtnT, class... paramsTs>
-   rtnT Invoke( ownerT owner, paramsTs... params )
+   rtnT Invoke( ownerT& owner, paramsTs&&... params )
    {
-      auto method = GetMethod<std::function<rtnT( ownerT&, paramsTs... )>>();
+      auto method = GetMethod<std::function<rtnT( ownerT&, paramsTs&&... )>>();
 
-      return method.Invoke( std::forward<ownerT>( owner ), std::forward<paramsTs...>( params ) );
+      return method( owner, std::forward<paramsTs>( params )... );
    }
 
 protected:
