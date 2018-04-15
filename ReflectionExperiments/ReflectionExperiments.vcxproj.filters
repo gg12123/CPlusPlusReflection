@@ -24,34 +24,25 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Reflectable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ReflectionMacros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Reflection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DerivedReflectableProperty.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReflectableProperty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DerivedReflectableMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DerivedReflectableProperty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="ReflectableMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DerivedReflectableProperty2.h">
+    <ClInclude Include="ReflectableProperty.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ReflectableProperty2.h">
+    <ClInclude Include="Reflection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Reflection2.h">
+    <ClInclude Include="ReflectionIncludes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,19 +50,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReflectionExperiments.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Reflectable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Reflection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ReflectableProperty.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ReflectableMethod.cpp">
+    <ClCompile Include="Example.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

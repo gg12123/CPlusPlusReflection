@@ -3,23 +3,42 @@
 #include <assert.h>
 #include "ReflectableMethod.h"
 
-template<class ownerT, class rtnT, class... paramsTs>
-class DerivedReflectableMethod : public ReflectableMethod
+template<int id, class qualifiedOwnerT, class rtnT, class... paramsTs>
+class DerivedReflectableMethod : public ReflectableMethod<typename std::decay<qualifiedOwnerT>::type>
 {
-public:
-   DerivedReflectableMethod( std::function<rtnT( ownerT&, paramsTs&&... )>&& method, Reflectable& owner, const char* name ) : ReflectableMethod( owner, name )
-   {
-      m_Method = std::move( method );
-   }
+   friend typename std::decay<qualifiedOwnerT>::type;
 
 protected:
    void* GetMethodPtr( const std::type_info& inputType ) override
    {
-      assert( typeid(std::function<rtnT( ownerT&, paramsTs&&... )>).hash_code() == inputType.hash_code() );
-
+      assert( typeid(std::function<rtnT( qualifiedOwnerT&, paramsTs&&... )>).hash_code() == inputType.hash_code() );
       return static_cast<void*>(&m_Method);
    }
 
 private:
-   std::function<rtnT( ownerT&, paramsTs&&... )> m_Method;
+
+   DerivedReflectableMethod()
+   {
+      m_FirstInit = true;
+   }
+
+   static DerivedReflectableMethod<id, qualifiedOwnerT, rtnT, paramsTs...>& Instance( std::function<rtnT( qualifiedOwnerT&, paramsTs&&... )>&& method, const char* name )
+   {
+      static DerivedReflectableMethod<id, qualifiedOwnerT, rtnT, paramsTs...> instance;
+      instance.Init( std::move( method ), name );
+      return instance;
+   }
+
+   void Init( std::function<rtnT( qualifiedOwnerT&, paramsTs&&... )>&& method, const char* name )
+   {
+      if (m_FirstInit)
+      {
+         m_FirstInit = false;
+         m_Method = std::move( method );
+         Register( name );
+      }
+   }
+
+   std::function<rtnT( qualifiedOwnerT&, paramsTs&&... )> m_Method;
+   bool m_FirstInit;
 };

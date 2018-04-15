@@ -146,24 +146,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DerivedReflectableMethod.h" />
-    <ClInclude Include="DerivedReflectableProperty2.h" />
-    <ClInclude Include="Reflectable.h" />
     <ClInclude Include="DerivedReflectableProperty.h" />
     <ClInclude Include="ReflectableMethod.h" />
     <ClInclude Include="ReflectableProperty.h" />
-    <ClInclude Include="ReflectableProperty2.h" />
     <ClInclude Include="Reflection.h" />
-    <ClInclude Include="Reflection2.h" />
+    <ClInclude Include="ReflectionIncludes.h" />
     <ClInclude Include="ReflectionMacros.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Reflectable.cpp" />
-    <ClCompile Include="ReflectableMethod.cpp" />
-    <ClCompile Include="ReflectableProperty.cpp" />
-    <ClCompile Include="Reflection.cpp" />
-    <ClCompile Include="ReflectionExperiments.cpp" />
+    <ClCompile Include="Example.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

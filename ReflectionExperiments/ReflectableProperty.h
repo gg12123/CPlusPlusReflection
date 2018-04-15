@@ -1,26 +1,40 @@
 #pragma once
 #include <typeinfo>
+#include "Reflection.h"
 
-class Reflectable;
-
+template<class ownerT>
 class ReflectableProperty
 {
 public:
-   ReflectableProperty( Reflectable& owner, const char* name );
 
-   template<class T>
-   T GetValue()
+   template<class propT>
+   propT GetValue( const ownerT& owner )
    {
-      return *(static_cast<T*>(GetValuePtr( typeid(T) )));
+      AssertCorrectPropType( typeid(propT) );
+
+      const char * ptr = reinterpret_cast<const char*>(&owner);
+      ptr += GetOffset( owner );
+
+      return *(reinterpret_cast<const propT*>(ptr));
    }
 
-   template<class T>
-   void SetValue( T value )
+   template<class propT>
+   void SetValue( ownerT& owner, propT prop )
    {
-      SetValue( static_cast<void*>(&value), typeid(T) );
+      AssertCorrectPropType( typeid(propT) );
+
+      char * ptr = reinterpret_cast<char*>(&owner);
+      ptr += GetOffset( owner );
+
+      *(reinterpret_cast<propT*>(ptr)) = std::move( prop );
    }
 
 protected:
-   virtual void* GetValuePtr( const std::type_info& inputType ) = 0;
-   virtual void SetValue( void* value , const std::type_info& inputType ) = 0;
+   virtual void AssertCorrectPropType( const type_info& inputType ) = 0;
+   virtual size_t GetOffset( const ownerT& owner ) = 0;
+
+   void Register( const char* propName )
+   {
+      Reflection<ownerT>::Instance().Register( *this, propName );
+   }
 };

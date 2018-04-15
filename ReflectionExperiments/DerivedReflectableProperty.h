@@ -2,30 +2,46 @@
 #include <assert.h>
 #include "ReflectableProperty.h"
 
-template<class T>
-class DerivedReflectableProperty : public ReflectableProperty
+template<class propT, class ownerT, int id>
+class DerivedReflectableProperty : public ReflectableProperty<ownerT>
 {
-public:
-   DerivedReflectableProperty( T& prop, Reflectable& owner, const char* name ) : ReflectableProperty( owner, name )
-   {
-      m_Property = &prop;
-   }
+   friend ownerT;
 
 protected:
-   void* GetValuePtr( const std::type_info& inputType ) override
+   void AssertCorrectPropType( const type_info& inputType ) override
    {
-      assert( inputType.hash_code() == typeid(T).hash_code() );
-
-      return static_cast<void*>(m_Property);
+      assert( inputType.hash_code() == typeid(propT).hash_code() );
    }
 
-   void SetValue( void* value, const std::type_info& inputType ) override
+   size_t GetOffset( const ownerT& owner ) override
    {
-      assert( inputType.hash_code() == typeid(T).hash_code() );
-
-      *m_Property = std::move( *(static_cast<T*>(value)) ); // The move is safe because a value is passed into the base
+      return size_t( &(owner.*m_Member) ) - size_t( &owner );
    }
 
 private:
-   T* m_Property;
+
+   DerivedReflectableProperty()
+   {
+      m_FirstInit = true;
+   }
+
+   static DerivedReflectableProperty<propT, ownerT, id>& Instance( propT ownerT::*member, const char* name )
+   {
+      static DerivedReflectableProperty<propT, ownerT, id> instance;
+      instance.Init( member, name );
+      return instance;
+   }
+
+   void Init( propT ownerT::*member, const char* name )
+   {
+      if (m_FirstInit)
+      {
+         m_FirstInit = false;
+         m_Member = member;
+         Register( name );
+      }
+   }
+
+   bool m_FirstInit;
+   propT ownerT::*m_Member;
 };
