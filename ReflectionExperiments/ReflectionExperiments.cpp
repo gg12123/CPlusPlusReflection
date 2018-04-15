@@ -3,55 +3,38 @@
 
 #include "stdafx.h"
 
-#include "Reflectable.h"
+#include "DerivedReflectableProperty2.h"
 #include <iostream>
 
-class TestReflectable : public Reflectable
+class TestReflectable
 {
 public:
+
    TestReflectable()
    {
-      m_X = 99.0;
+      someProp = 20.0;
+
+      someProp_.SetValue<double>( *this, 2.0f );
+
+      double x = someProp_.GetValue<double>( *this );
    }
 
-   double GetX() { return m_X; }
+private:
+   double someProp;
 
-   DECLARE_REFLECTABLE_PROP( double, m_X );
-   DECLARE_REFLECTABLE_PROP( double, m_abc );
-   DECLARE_REFLECTABLE_PROP( double, m_Num );
+   const char* name = "someProp";
 
-   DerivedReflectableMethod<const TestReflectable, int, double> method =
-      DerivedReflectableMethod<const TestReflectable, int, double>( &TestReflectable::TestFunc, *this, "method" );
-
-   int TestFunc( double x ) const
-   {
-      return 5;
-   }
-
-   DerivedReflectableMethod<TestReflectable, double> method2 =
-      DerivedReflectableMethod<TestReflectable, double>( &TestReflectable::GetX, *this, "method2" );
-
-   DerivedReflectableMethod<TestReflectable, void> method3 =
-      DerivedReflectableMethod<TestReflectable, void>( &TestReflectable::VoidMethod, *this, "method3" );
-
-   void VoidMethod() {}
+   DerivedReflectableProperty2<double, TestReflectable>& someProp_ =
+      DerivedReflectableProperty2<double, TestReflectable, name>::Instance( &TestReflectable::someProp );
 };
-
 
 int main()
 {
-   std::vector<std::string> names;
-   Reflection::GetPropertyNames<TestReflectable>( names );
-
    TestReflectable tr;
 
-   auto* prop = Reflection::GetProperty( names[ 0 ], tr );
+   auto* prop = Reflection2<TestReflectable>::Instance().GetProperty( "someProp" );
 
-   prop->SetValue<double>( 1.0 );
-
-   ReflectableMethod* method = Reflection::GetMethod( "method", tr );
-
-   auto i = method->Invoke<const TestReflectable, int, double>( tr, 1.0 );
+   auto x = prop->GetValue<double>( tr );
 
    return 0;
 }

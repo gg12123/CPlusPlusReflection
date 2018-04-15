@@ -1,9 +1,13 @@
 ﻿  stdafx.cpp
   ReflectionExperiments.cpp
-  Reflection.cpp
-  ReflectableProperty.cpp
-  ReflectableMethod.cpp
-  Reflectable.cpp
-  Generating Code...
-  ReflectionExperiments.vcxproj -> C:\Users\gg_11\Documents\Visual Studio 2015\Projects\CPlusPlusReflection\Debug\ReflectionExperiments.exe
-  ReflectionExperiments.vcxproj -> C:\Users\gg_11\Documents\Visual Studio 2015\Projects\CPlusPlusReflection\Debug\ReflectionExperiments.pdb (Full PDB)
+c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\derivedreflectableproperty2.h(10): error C2146: syntax error: missing '>' before identifier 'propName'
+  c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\derivedreflectableproperty2.h(47): note: see reference to class template instantiation 'DerivedReflectableProperty2<propT,ownerT,propName...>' being compiled
+c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\derivedreflectableproperty2.h(10): error C3545: 'propName': parameter pack expects a non-type template argument
+c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\reflectionexperiments.cpp(25): error C2762: 'DerivedReflectableProperty2': invalid expression as a template argument for 'propName'
+  c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\derivedreflectableproperty2.h(6): note: see declaration of 'DerivedReflectableProperty2'
+c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\reflectionexperiments.cpp(25): error C2955: 'DerivedReflectableProperty2': use of class template requires template argument list
+  c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\derivedreflectableproperty2.h(6): note: see declaration of 'DerivedReflectableProperty2'
+c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\reflectionexperiments.cpp(25): fatal error C1903: unable to recover from previous error(s); stopping compilation
+  INTERNAL COMPILER ERROR in 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe'
+      Please choose the Technical Support command on the Visual C++
+      Help menu, or open the Technical Support help file for more information

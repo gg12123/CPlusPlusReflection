@@ -45,6 +45,15 @@
     <ClInclude Include="ReflectableMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DerivedReflectableProperty2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReflectableProperty2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reflection2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
