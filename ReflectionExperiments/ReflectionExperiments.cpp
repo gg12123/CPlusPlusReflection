@@ -4,37 +4,44 @@
 #include "stdafx.h"
 
 #include "DerivedReflectableProperty2.h"
+#include "ReflectionMacros.h"
 #include <iostream>
+
+class SomeOtherReflectable
+{
+   MAKE_REFLECTABLE( SomeOtherReflectable );
+
+public:
+   SomeOtherReflectable()
+   {
+   }
+};
 
 class TestReflectable
 {
+   MAKE_REFLECTABLE( TestReflectable );
+
 public:
 
    TestReflectable()
    {
-      someProp = 20.0;
-
-      someProp_.SetValue<double>( *this, 2.0f );
-
-      double x = someProp_.GetValue<double>( *this );
+      m_Prop = 1;
    }
 
 private:
-   double someProp;
-
-   const char* name = "someProp";
-
-   DerivedReflectableProperty2<double, TestReflectable>& someProp_ =
-      DerivedReflectableProperty2<double, TestReflectable, name>::Instance( &TestReflectable::someProp );
+   DECLARE_REFLECTABLE_PROP_2( int, m_Prop );
 };
 
 int main()
 {
    TestReflectable tr;
+   TestReflectable tr2;
 
-   auto* prop = Reflection2<TestReflectable>::Instance().GetProperty( "someProp" );
+   auto* prop = Reflection2<TestReflectable>::Instance().GetProperty( "m_Prop" );
 
-   auto x = prop->GetValue<double>( tr );
+   auto x = prop->GetValue<int>( tr );
+
+   prop->SetValue<int>( tr2, 40 );
 
    return 0;
 }

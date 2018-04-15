@@ -2,17 +2,10 @@
 #include <assert.h>
 #include "ReflectableProperty2.h"
 
-template<class propT, class ownerT, const char* propName>
+template<class propT, class ownerT, int id>
 class DerivedReflectableProperty2 : public ReflectableProperty2<ownerT>
 {
-public:
-
-   static DerivedReflectableProperty2<propT, ownerT, const char* propName>& Instance( propT ownerT::*member )
-   {
-      static DerivedReflectableProperty2<propT, ownerT, propName> instance;
-      instance.Init( member );
-      return instance;
-   }
+   friend ownerT;
 
 protected:
    void AssertCorrectPropType( const type_info& inputType ) override
@@ -32,13 +25,20 @@ private:
       m_FirstInit = true;
    }
 
-   void Init( propT ownerT::*member )
+   static DerivedReflectableProperty2<propT, ownerT, id>& Instance( propT ownerT::*member, const char* name )
+   {
+      static DerivedReflectableProperty2<propT, ownerT, id> instance;
+      instance.Init( member, name );
+      return instance;
+   }
+
+   void Init( propT ownerT::*member, const char* name )
    {
       if (m_FirstInit)
       {
          m_FirstInit = false;
          m_Member = member;
-         Register( propName );
+         Register( name );
       }
    }
 
