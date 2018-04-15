@@ -5,7 +5,13 @@
 template<class propT, class ownerT, int id>
 class DerivedReflectableProperty : public ReflectableProperty<ownerT>
 {
-   friend ownerT;
+public:
+   static DerivedReflectableProperty<propT, ownerT, id>& Instance( propT ownerT::*member, const char* name )
+   {
+      static DerivedReflectableProperty<propT, ownerT, id> instance;
+      instance.Init( member, name );
+      return instance;
+   }
 
 protected:
    void AssertCorrectPropType( const type_info& inputType ) override
@@ -19,17 +25,9 @@ protected:
    }
 
 private:
-
    DerivedReflectableProperty()
    {
       m_FirstInit = true;
-   }
-
-   static DerivedReflectableProperty<propT, ownerT, id>& Instance( propT ownerT::*member, const char* name )
-   {
-      static DerivedReflectableProperty<propT, ownerT, id> instance;
-      instance.Init( member, name );
-      return instance;
    }
 
    void Init( propT ownerT::*member, const char* name )

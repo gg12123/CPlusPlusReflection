@@ -1,8 +1,4 @@
-// ReflectionExperiments.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
-
 #include "ReflectionIncludes.h"
 #include <iostream>
 
@@ -15,7 +11,7 @@ public:
    {
    }
 
-   DECLARE_REFLECTABLE_PROP( int, m_Prop );
+   REFLECTABLE_PROPERTY( int, m_OtherProp );
 };
 
 class TestReflectable
@@ -29,10 +25,10 @@ public:
    }
 
 private:
-   DECLARE_REFLECTABLE_PROP( int, m_Prop );
+   REFLECTABLE_PROPERTY( int, m_Prop );
 
-   DECLARE_REFLECTABLE_METHOD( double, SomeMethod, int );
-   DECLARE_CONST_REFLECTABLE_METHOD( double, SomeConstMethod, int );
+   REFLECTABLE_METHOD( double, SomeMethod, int );
+   CONST_REFLECTABLE_METHOD( double, SomeConstMethod, int );
 };
 
 double TestReflectable::SomeMethod( int i )
@@ -61,6 +57,10 @@ int main()
    auto* constMethod = Reflection<TestReflectable>::Instance().GetMethod( "SomeConstMethod" );
    double cxx = constMethod->Invoke<double, int>( (const TestReflectable&)tr, 1 );
    double cxx2 = constMethod->Invoke<double, int>( (const TestReflectable&)tr2, 1 );
+
+   SomeOtherReflectable other;
+   auto *prop2 = Reflection<SomeOtherReflectable>::Instance().GetProperty( "m_OtherProp" );
+   prop2->SetValue<int>( other, 1 );
 
    return 0;
 }

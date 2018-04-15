@@ -2,38 +2,17 @@
 #include <assert.h>
 #include <string>
 #include <unordered_map>
-
-template<class T>
-T* GetFromMap( std::unordered_map<std::string, T*>& map, const std::string& name )
-{
-   T* prop = nullptr;
-   auto it = map.find( name );
-
-   if (it != map.end())
-   {
-      prop = it->second;
-   }
-
-   return prop;
-}
-
-template<class T>
-class ReflectableProperty;
-
-template<class T>
-class ReflectableMethod;
+#include "IReflection.h"
 
 template<class ownerT>
-class Reflection
+class Reflection : public IReflection<ownerT>
 {
 public:
-   static Reflection<ownerT>& Instance()
+   static IReflection<ownerT>& Instance()
    {
       static Reflection<ownerT> inst;
       return inst;
    }
-
-   // TODO - It would be good if these registration methods were more private.
 
    void Register( ReflectableProperty<ownerT>& prop, const char * name )
    {
@@ -72,6 +51,20 @@ private:
          m_Initialised = true;
          ownerT obj; // This will make the ownerT type register itself with this class.
       }
+   }
+
+   template<class T>
+   T* GetFromMap( std::unordered_map<std::string, T*>& map, const std::string& name )
+   {
+      T* prop = nullptr;
+      auto it = map.find( name );
+
+      if (it != map.end())
+      {
+         prop = it->second;
+      }
+
+      return prop;
    }
 
    std::unordered_map<std::string, ReflectableProperty<ownerT>*> m_Properties;

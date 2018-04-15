@@ -6,7 +6,6 @@ template<class ownerT>
 class ReflectableProperty
 {
 public:
-
    template<class propT>
    propT GetValue( const ownerT& owner )
    {
@@ -35,6 +34,6 @@ protected:
 
    void Register( const char* propName )
    {
-      Reflection<ownerT>::Instance().Register( *this, propName );
+      dynamic_cast<Reflection<ownerT>&>(Reflection<ownerT>::Instance()).Register( *this, propName );
    }
 };

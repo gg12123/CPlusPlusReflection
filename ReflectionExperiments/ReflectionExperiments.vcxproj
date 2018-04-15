@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="DerivedReflectableMethod.h" />
     <ClInclude Include="DerivedReflectableProperty.h" />
+    <ClInclude Include="IReflection.h" />
     <ClInclude Include="ReflectableMethod.h" />
     <ClInclude Include="ReflectableProperty.h" />
     <ClInclude Include="Reflection.h" />

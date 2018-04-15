@@ -33,6 +33,6 @@ protected:
 
    void Register( const char* name )
    {
-      Reflection<ownerT>::Instance().Register( *this, name );
+      dynamic_cast<Reflection<ownerT>&>(Reflection<ownerT>::Instance()).Register( *this, name );
    }
 };
