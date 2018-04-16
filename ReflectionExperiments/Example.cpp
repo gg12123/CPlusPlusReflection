@@ -2,65 +2,55 @@
 #include "ReflectionIncludes.h"
 #include <iostream>
 
-class SomeOtherReflectable
+class Example
 {
-   MAKE_REFLECTABLE( SomeOtherReflectable );
+   // Register this class with the reflection system.
+   MAKE_REFLECTIVE( Example );
 
 public:
-   SomeOtherReflectable()
+   Example()
    {
-   }
-
-   REFLECTABLE_PROPERTY( int, m_OtherProp );
-};
-
-class TestReflectable
-{
-   MAKE_REFLECTABLE( TestReflectable );
-
-public:
-   TestReflectable()
-   {
-      m_Prop = 1;
    }
 
 private:
-   REFLECTABLE_PROPERTY( int, m_Prop );
+   // Declare some properties that can be reflected on.
+   REFLECTIVE_PROPERTY( int, m_Prop );
+   REFLECTIVE_PROPERTY( int, m_Prop2 );
+   REFLECTIVE_PROPERTY( double, m_Prop3 );
 
-   REFLECTABLE_METHOD( double, SomeMethod, int );
-   CONST_REFLECTABLE_METHOD( double, SomeConstMethod, int );
+   // Declare some methods that can be reflected on.
+   REFLECTIVE_METHOD( double, SomeMethod, int );
+   CONST_REFLECTIVE_METHOD( double, SomeConstMethod, int );
 };
 
-double TestReflectable::SomeMethod( int i )
+double Example::SomeMethod( int i )
 {
-   return 1.0;
+   return static_cast<double>(i);
 }
 
-double TestReflectable::SomeConstMethod( int i ) const
+double Example::SomeConstMethod( int i ) const
 {
-   return 3.0;
+   return static_cast<double>(i);
 }
 
 int main()
 {
-   TestReflectable tr;
-   TestReflectable tr2;
+   // Get all the properties and methods
+   auto properties = Reflection<Example>::Instance().GetProperties();
+   auto methods = Reflection<Example>::Instance().GetMethods();
 
-   auto* prop = Reflection<TestReflectable>::Instance().GetProperty( "m_Prop" );
-   auto x = prop->GetValue<int>( tr );
-   prop->SetValue<int>( tr2, 40 );
+   // Get specific ones
+   auto prop = Reflection<Example>::Instance().GetProperty( "m_Prop2" );
+   auto method = Reflection<Example>::Instance().GetMethod( "SomeMethod" );
 
-   auto* method = Reflection<TestReflectable>::Instance().GetMethod( "SomeMethod" );
-   double xx = method->Invoke<double, int>( tr, 1 );
-   double xx2 = method->Invoke<double, int>( tr2, 1 );
+   Example test;
 
-   auto* constMethod = Reflection<TestReflectable>::Instance().GetMethod( "SomeConstMethod" );
-   double cxx = constMethod->Invoke<double, int>( (const TestReflectable&)tr, 1 );
-   double cxx2 = constMethod->Invoke<double, int>( (const TestReflectable&)tr2, 1 );
+   // Set and get a property
+   prop->SetValue<int>( test, 1 );
+   auto value = prop->GetValue<int>( test );
 
-   SomeOtherReflectable other;
-   auto *prop2 = Reflection<SomeOtherReflectable>::Instance().GetProperty( "m_OtherProp" );
-   prop2->SetValue<int>( other, 1 );
+   // Invoke a method
+   auto output = method->Invoke<double, int>( test, 1 );
 
    return 0;
 }

@@ -1,4 +1,4 @@
 #pragma once
-#include "DerivedReflectableProperty.h"
-#include "DerivedReflectableMethod.h"
+#include "DerivedReflectiveProperty.h"
+#include "DerivedReflectiveMethod.h"
 #include "ReflectionMacros.h"

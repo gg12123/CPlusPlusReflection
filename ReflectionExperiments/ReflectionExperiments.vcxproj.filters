@@ -27,18 +27,6 @@
     <ClInclude Include="ReflectionMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DerivedReflectableMethod.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DerivedReflectableProperty.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReflectableMethod.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReflectableProperty.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Reflection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -46,6 +34,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IReflection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DerivedReflectiveMethod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DerivedReflectiveProperty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReflectiveMethod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReflectiveProperty.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reflective.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

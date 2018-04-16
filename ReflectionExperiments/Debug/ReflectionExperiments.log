@@ -1,3 +1,5 @@
-﻿  Example.cpp
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets(76,5): warning : The process cannot access the file 'c:\users\gg_11\documents\visual studio 2015\projects\cplusplusreflection\reflectionexperiments\debug\reflectionexperiments.pch' because it is being used by another process.
+  stdafx.cpp
+  Example.cpp
   ReflectionExperiments.vcxproj -> C:\Users\gg_11\Documents\Visual Studio 2015\Projects\CPlusPlusReflection\Debug\ReflectionExperiments.exe
   ReflectionExperiments.vcxproj -> C:\Users\gg_11\Documents\Visual Studio 2015\Projects\CPlusPlusReflection\Debug\ReflectionExperiments.pdb (Full PDB)

@@ -14,28 +14,40 @@ public:
       return inst;
    }
 
-   void Register( ReflectableProperty<ownerT>& prop, const char * name )
+   void Register( ReflectiveProperty<ownerT>& prop, const char * name )
    {
       assert( m_Properties.find( name ) == m_Properties.end() );
       m_Properties[ name ] = &prop;
    }
 
-   void Register( ReflectableMethod<ownerT>& method, const char * name )
+   void Register( ReflectiveMethod<ownerT>& method, const char * name )
    {
       assert( m_Methods.find( name ) == m_Methods.end() );
       m_Methods[ name ] = &method;
    }
 
-   ReflectableProperty<ownerT>* GetProperty( const std::string& name )
+   ReflectiveProperty<ownerT>* GetProperty( const std::string& name )
    {
       LazyInit();
-      return GetFromMap<ReflectableProperty<ownerT>>( m_Properties, name );
+      return GetFromMap<ReflectiveProperty<ownerT>>( m_Properties, name );
    }
 
-   ReflectableMethod<ownerT>* GetMethod( const std::string& name )
+   ReflectiveMethod<ownerT>* GetMethod( const std::string& name )
    {
       LazyInit();
-      return GetFromMap<ReflectableMethod<ownerT>>( m_Methods, name );
+      return GetFromMap<ReflectiveMethod<ownerT>>( m_Methods, name );
+   }
+
+   std::vector<ReflectiveProperty<ownerT>*> GetProperties()
+   {
+      LazyInit();
+      return GetAllFromMap<ReflectiveProperty<ownerT>>( m_Properties );
+   }
+
+   std::vector<ReflectiveMethod<ownerT>*> GetMethods()
+   {
+      LazyInit();
+      return GetAllFromMap<ReflectiveMethod<ownerT>>( m_Methods );
    }
 
 private:
@@ -67,7 +79,18 @@ private:
       return prop;
    }
 
-   std::unordered_map<std::string, ReflectableProperty<ownerT>*> m_Properties;
-   std::unordered_map<std::string, ReflectableMethod<ownerT>*> m_Methods;
+   template<class T>
+   std::vector<T*> GetAllFromMap( std::unordered_map<std::string, T*>& map )
+   {
+      std::vector<T*> values;
+
+      for (auto it = map.begin(); it != map.end(); it++)
+         values.push_back( it->second );
+
+      return values;
+   }
+
+   std::unordered_map<std::string, ReflectiveProperty<ownerT>*> m_Properties;
+   std::unordered_map<std::string, ReflectiveMethod<ownerT>*> m_Methods;
    bool m_Initialised;
 };

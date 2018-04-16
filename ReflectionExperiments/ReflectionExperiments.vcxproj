@@ -145,11 +145,12 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DerivedReflectableMethod.h" />
-    <ClInclude Include="DerivedReflectableProperty.h" />
+    <ClInclude Include="DerivedReflectiveMethod.h" />
+    <ClInclude Include="DerivedReflectiveProperty.h" />
     <ClInclude Include="IReflection.h" />
-    <ClInclude Include="ReflectableMethod.h" />
-    <ClInclude Include="ReflectableProperty.h" />
+    <ClInclude Include="Reflective.h" />
+    <ClInclude Include="ReflectiveMethod.h" />
+    <ClInclude Include="ReflectiveProperty.h" />
     <ClInclude Include="Reflection.h" />
     <ClInclude Include="ReflectionIncludes.h" />
     <ClInclude Include="ReflectionMacros.h" />

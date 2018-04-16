@@ -1,18 +1,18 @@
 #pragma once
 
-#define MAKE_REFLECTABLE( className )     typedef className ReflectableClassType
+#define MAKE_REFLECTIVE( className )     typedef className ReflectiveClassType
 
 
-#define REFLECTABLE_PROPERTY( type, name )\
+#define REFLECTIVE_PROPERTY( type, name )\
    type name;\
-   DerivedReflectableProperty<type, ReflectableClassType, __LINE__>& ___##name = DerivedReflectableProperty<type, ReflectableClassType, __LINE__>::Instance( &ReflectableClassType::name, #name )
+   DerivedReflectiveProperty<type, ReflectiveClassType, __LINE__>& ___##name = DerivedReflectiveProperty<type, ReflectiveClassType, __LINE__>::Instance( &ReflectiveClassType::name, #name )
 
 
-#define REFLECTABLE_METHOD( rtnType, methodName, ... )\
+#define REFLECTIVE_METHOD( rtnType, methodName, ... )\
    rtnType methodName( __VA_ARGS__ );\
-   DerivedReflectableMethod<__LINE__, ReflectableClassType, rtnType, __VA_ARGS__> ___##methodName = DerivedReflectableMethod<__LINE__, ReflectableClassType, rtnType, __VA_ARGS__>::Instance( &ReflectableClassType::methodName, #methodName )
+   DerivedReflectiveMethod<__LINE__, ReflectiveClassType, rtnType, __VA_ARGS__> ___##methodName = DerivedReflectiveMethod<__LINE__, ReflectiveClassType, rtnType, __VA_ARGS__>::Instance( &ReflectiveClassType::methodName, #methodName )
 
 
-#define CONST_REFLECTABLE_METHOD( rtnType, methodName, ... )\
+#define CONST_REFLECTIVE_METHOD( rtnType, methodName, ... )\
    rtnType methodName( __VA_ARGS__ ) const;\
-   DerivedReflectableMethod<__LINE__, const ReflectableClassType, rtnType, __VA_ARGS__> ___##methodName = DerivedReflectableMethod<__LINE__, const ReflectableClassType, rtnType, __VA_ARGS__>::Instance( &ReflectableClassType::methodName, #methodName )
+   DerivedReflectiveMethod<__LINE__, const ReflectiveClassType, rtnType, __VA_ARGS__> ___##methodName = DerivedReflectiveMethod<__LINE__, const ReflectiveClassType, rtnType, __VA_ARGS__>::Instance( &ReflectiveClassType::methodName, #methodName )
